@@ -7,7 +7,7 @@ for /f "usebackq tokens=2* delims=_" %%A in (`reg query "HKCU\SOFTWARE\Valve\Ste
 set "steampath=%steampath:~6%" &set "libfilter=LibraryFolders { TimeNextStatsReport ContentStatsID }"
 for /f usebackq^ delims^=^"^ tokens^=4 %%A in (`findstr /v "%libfilter%" "%steampath%\SteamApps\libraryfolders.vdf"`) do (
 if exist "%%A\steamapps\appmanifest_570.acf" if exist "%%A\steamapps\common\dota 2 beta\game\dota\maps\dota.vpk" set "libpath=%%A")
-if defined libpath (set "dota2=%libpath%\steamapps\common\dota 2 beta\game") else set "dota2=%~dp0"
+if defined libpath (set "dota2=%libpath%\steamapps\common\dota 2 beta\game") else set "dota2=%steampath%\steamapps\common\dota 2 beta\game"
 for /f "tokens=1 delims=: eol=?" %%I in ('findstr /n /l avemod01 "%dota2%\dota\gameinfo.gi"') do set /A "already_modded=%%I"
 if defined already_modded goto :eof
 setlocal enabledelayedexpansion &cd /d "%dota2%\dota"
