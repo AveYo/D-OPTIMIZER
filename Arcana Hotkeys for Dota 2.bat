@@ -26,24 +26,33 @@ cscript /nologo /e:JScript "%~f0" add_launch_options "%userdata%\config\localcon
 call :howto
 
 :: done!
-call :end Finished! & echo. & echo goto :eof
+call :end Finished!
+exit
+goto :eof
 
 :set_dota
 for /f "usebackq tokens=2* delims=_" %%A in (`reg query "HKCU\SOFTWARE\Valve\Steam" 2^>nul ^| find /i "SteamPath"`) do set "steampath=%%~A"
 set "steampath=%steampath:~6%" &set "libfilter=LibraryFolders { TimeNextStatsReport ContentStatsID }"
+if not exist "%steampath%\SteamApps\libraryfolders.vdf" call :end ! Cannot find Steam library!
 for /f usebackq^ delims^=^"^ tokens^=4 %%A in (`findstr /v "%libfilter%" "%steampath%\SteamApps\libraryfolders.vdf"`) do (
-if exist "%%A\steamapps\appmanifest_570.acf" if exist "%%A\steamapps\common\dota 2 beta\game\dota\maps\dota.vpk" set "libfs=%%A")
-if defined libfs (set "dota=%libfs:\\=\%\steamapps\common\dota 2 beta") else set "dota=%steampath%\steamapps\common\dota 2 beta"
+if exist "%%A\steamapps\appmanifest_570.acf" if exist "%%A\steamapps\common\dota 2 beta\game\dota\maps\dota.vpk" set "libfs=%%A"
+)
+set "dotab=%steampath%\steamapps\common\dota 2 beta"
+if defined libfs set "dotab=%libfs:\\=\%\steamapps\common\dota 2 beta"
+set "dota=%dotab:/=\%"
+if not exist "%dota%\game\dota\maps\dota.vpk" call :end ! Cannot find Dota 2!
 cd /d "%dota%\game\dota\" >nul 2>&1
 for /f delims^=^ eol^= %%b in ('dir /a:-d /b /o:d /t:w cache_*.soc 2^>nul') do set "usercache=%%~nb"
 set "userdata=%steampath:/=\%\userdata\%usercache:cache_=%"
-(if not exist "%userdata%\config\localconfig.vdf" call :end ! Cannot find Dota 2 user data!) &goto :eof
+if not exist "%userdata%\config\localconfig.vdf" call :end ! Cannot find Dota 2 user data!
+goto :eof
 :wait
 setlocal enabledelayedexpansion &if not defined x1337cr for /f %%a in ('copy /z "%~dpf0" nul') do set "x1337cr=%%a"
 echo. & (for /l %%i in (%1,-1,1) do <NUL SET /P "=_%2 in %%i !x1337cr!" &ping -n 2 localhost >nul 2>&1) &endlocal &goto :eof
 :end
-(if "%1"=="!" COLOR 7c) & echo  %* & call :wait 30 Closing & exit
-rem <nul set /p "=%%i,"
+(if "%1"=="!" COLOR 7c) & echo  %* & call :wait 30 Closing
+exit
+goto :eof
 :logo
 echo.
 echo     _______             ______    ______    ________   __   ___  ___   __   ________   _______   ______
@@ -360,7 +369,7 @@ if (WSH.Arguments(0)=='res85_decoder') res85_decoder(WSH.Arguments(1));
 if (WSH.Arguments(0)=='mod_panorama_localization') mod_panorama_localization(WSH.Arguments(1));
 if (WSH.Arguments(0)=='add_launch_options') add_launch_options(WSH.Arguments(1),WSH.Arguments(2));
 
-//  AVEYO's D-OPTIMIZER V3 - 2016 (cc)                                                                                  3.0
+//  AVEYO's D-OPTIMIZER V3 - 2016 (cc)                                                                                  3.0a
 //  Introducing ARCANA HOTKEYS : Unified CastControl, Multiple Chatwheel Presets and Builder, Camera Actions, Panorama Keys
 //
 //  Important notice to Valve (most definitely rhetorical):
