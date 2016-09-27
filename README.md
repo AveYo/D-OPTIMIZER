@@ -11,6 +11,7 @@ If you are on Windows, using the batch file is the recommended method!
 
 Try to close Steam before running it
 
+Updated!
 
 
 For manual install, unpack and copy the zip file content to your steamapps folder where Dota 2 is installed 
