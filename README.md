@@ -12,6 +12,7 @@ If you are on Windows, the batch file is recommended for hassle-free installatio
 Doing it manually is not too difficult either, only two steps required:  
 - [ ] add Dota 2 Launch Option: -LV
 - [ ] unpack and copy the zip file content to your steamapps folder where Dota 2 is installed  
+
 **\steamapps\common\dota 2 beta\game\dota_lv\** should now contain _pak01_dir.vpk_ and the _panorama_ subfolder with the language files.  
 _This probably works on Linux and Mac too..._
 
