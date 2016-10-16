@@ -1,5 +1,5 @@
-# ARCANA HOTKEYS II for Dota 2 - AVEYO's D-OPTIMIZER V3 (cc)
-## SPACE Modifier, QuickCast Enhancements, Multiple Chatwheels, Camera Actions, Panorama Keys
+## ARCANA HOTKEYS II for Dota 2 - AVEYO's D-OPTIMIZER V3 (cc)
+### SPACE Modifier, QuickCast Enhancements, Multiple Chatwheels, Camera Actions, Panorama Keys
 ### [Also available on Dota 2 Guides](http://steamcommunity.com/sharedfiles/filedetails/?id=408986743)  
 ![Arcana Hotkeys](https://cloud.githubusercontent.com/assets/12874843/19415619/1b6efa54-937e-11e6-9412-e74485c4f965.png)
 
