@@ -1,7 +1,7 @@
-## ARCANA HOTKEYS II for Dota 2 - AVEYO's D-OPTIMIZER V3 (cc)
+## ARCANA HOTKEYS II for Dota 2 - AVEYO's D-OPTIMIZER v3.2 (cc)
 ### SPACE Modifier, QuickCast Enhancements, Multiple Chatwheels, Camera Actions, Panorama Keys
 ### [Also available on Dota 2 Guides](http://steamcommunity.com/sharedfiles/filedetails/?id=408986743)  
-![Arcana Hotkeys](https://cloud.githubusercontent.com/assets/12874843/19415619/1b6efa54-937e-11e6-9412-e74485c4f965.png)
+![Arcana Hotkeys](https://cloud.githubusercontent.com/assets/12874843/19423883/4bb6e1ea-942d-11e6-9091-ce3e803c7295.png)
 
 ## WHAT IS THIS:  
 It's an addon - like a custom game, it uses it's own vpk, that contains just one panorama keys cfg, one dota keys cfg, one help-page xml and one help-page css callable from the panorama keys cfg.  
@@ -14,8 +14,8 @@ Adding/removing -lv launch option enables/disables it.
 - distinct QuickCast (made primary) and Cast keys supported
 - removed alien concepts like CastControl and QuickLearn-once (so SPACE + Ability/Item does directly Cast by default)
 - more SPACE+ actions, even if there are 12 less usable keys now (by hardcoding chatwheel builder to keypad)
-- reorganized toggles and camera control keys (added follow courier, then return to hero action)
-- legacy keys still supported
+- reorganized toggles and camera control keys (added follow courier - then return to hero action, added event camera)
+- legacy keys supported with just a few toggles being unavailable (also changed chatwheel to 7 and next lite preset to 8)
 - patch lowviolence particles - "alien blood"	(only the m_hLowViolenceDef = * line is removed)
 - added a fast fix for the older, still functional bot matches page
 - redesigned help page (F10) - Panorama dynamic layout: mastered :D
