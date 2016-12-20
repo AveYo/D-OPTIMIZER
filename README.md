@@ -10,6 +10,7 @@ http://pastebin.com/ZNSDA8hw
 http://pastebin.com/MdqSLBSv
 
 ### Cvars (console commands) sorted by category (work in progress)
+https://github.com/AveYo/D-OPTIMIZER/blob/master/Dota2%20cvars.xls
 
 ### Useful batch files
 http://pastebin.com/kzkDrDN3 - reset_Dota2.bat (both local cfg and remote cloud settings)
