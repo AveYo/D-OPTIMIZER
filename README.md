@@ -1,15 +1,20 @@
 # DOTA 2 RESOURCES BY AVEYO
 
+### All Dota 2 GUI Settings - autoexec.cfg reference
+http://pastebin.com/ZNSDA8hw
+
+
+### Benchmark.cfg (no external tools needed, uses built-in Source 2 reporting)
+http://pastebin.com/MdqSLBSv use with MatchID 2844309781 replay
+
+[As .zip including replay file](https://github.com/AveYo/D-OPTIMIZER/releases/download/3.0/Dota_2_benchmark.zip)
+
+
 ### Launch options
 http://pastebin.com/CZqEP5Qr
 
 ### GUI settings reference for autoexec.cfg (featuring tweaked video quality presets)
 http://pastebin.com/ZNSDA8hw
-
-### Benchmark.cfg (no external tools needed, uses built-in Source 2 reporting)
-http://pastebin.com/MdqSLBSv
-
-[As .zip with replay file](https://github.com/AveYo/D-OPTIMIZER/releases/download/3.0/Dota_2_benchmark.zip)
 
 ### Cvars (console commands) sorted by category (work in progress)
 https://github.com/AveYo/D-OPTIMIZER/blob/master/Dota2%20cvars.xls
