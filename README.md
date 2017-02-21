@@ -20,11 +20,11 @@ http://pastebin.com/ZNSDA8hw
 https://github.com/AveYo/D-OPTIMIZER/blob/master/Dota2%20cvars.xls
 
 ### Useful batch files
+http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update PCs over LAN instead of downloading huge internet patches multiple times)
+
 http://pastebin.com/kzkDrDN3 - reset_Dota2.bat (both local cfg and remote cloud settings)
 
 http://pastebin.com/GMyD7UwK - list_my_programs.bat (includes dxdiag, use it for dev.dota bug reports)
-
-http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update other PCs over LAN instead of downloading from internet multiple huge patches)
 
 http://pastebin.com/uLi92b5s - dota2bandwidthsaver.bat (small savings by blocking a few steam domains)
 
