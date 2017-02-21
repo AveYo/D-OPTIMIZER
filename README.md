@@ -24,6 +24,8 @@ http://pastebin.com/kzkDrDN3 - reset_Dota2.bat (both local cfg and remote cloud 
 
 http://pastebin.com/GMyD7UwK - list_my_programs.bat (includes dxdiag, use it for dev.dota bug reports)
 
+http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update other PCs over LAN instead of downloading from internet multiple huge patches)
+
 http://pastebin.com/uLi92b5s - dota2bandwidthsaver.bat (small savings by blocking a few steam domains)
 
 http://pastebin.com/WAdTPBpC - wifi_scan_toggle.bat (might help with random lag / stutters)
