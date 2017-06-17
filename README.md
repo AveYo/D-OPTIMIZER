@@ -1,5 +1,9 @@
 # DOTA 2 RESOURCES BY AVEYO
 
+### No-Bling mod - restoring glance value (readme inside)
+https://github.com/AveYo/D-OPTIMIZER/blob/master/dota_lv_nobling_mod_by_aveyo.zip
+
+
 ### All Dota 2 GUI Settings - autoexec.cfg reference
 http://pastebin.com/ZNSDA8hw
 
