@@ -28,8 +28,8 @@ if not exist "%STEAMAPPS%\common\dota 2 beta\game\dota\maps\dota.vpk" call :end 
 set "DOTA=%STEAMAPPS%\common\dota 2 beta" &cd /d "%STEAMAPPS%\common\dota 2 beta\game\dota"
 call :reg_query "HKCU\SOFTWARE\Valve\Steam\ActiveProcess" "ActiveUser" STEAMUSER &set /a "STEAMID=STEAMUSER" >nul 2>nul
 if defined STEAMID if exist "%STEAMPATH%\userdata\%STEAMID%\config\localconfig.vdf" set "STEAMDATA=%STEAMPATH%\userdata\%STEAMID%"
-if not defined STEAMID for /f delims^=^ eol^= %%b in ('dir /a:-d /b /o:d /t:w cache_*.soc 2^>nul') do set "usercache=%%~nb"
-if not defined STEAMID if defined usercache set "STEAMDATA=%steampath%\userdata\%usercache:cache_=%"
+if not defined STEAMDATA for /f delims^=^ eol^= %%b in ('dir /a:-d /b /o:d /t:w cache_*.soc 2^>nul') do set "usercache=%%~nb"
+if not defined STEAMDATA if defined usercache set "STEAMDATA=%steampath%\userdata\%usercache:cache_=%"
 if not exist "%STEAMDATA%\570\remote\cfg\dotakeys_personal.lst" call :end ! Cannot find your dotakeys definition file ! 
 goto :eof
 :reg_query %1:KeyName %2:ValueName %3:OutputVariable %4:other_options[example: "/t REG_DWORD"]
