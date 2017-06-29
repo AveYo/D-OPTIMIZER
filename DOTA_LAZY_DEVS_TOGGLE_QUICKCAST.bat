@@ -1,7 +1,9 @@
 goto="HERO" /* 
 :"HERO"
-@echo off &mode 99,9 &color 4F &title DOTA_TOGGLE_QUICKCAST_ALTERNATIVE_FOR_LAZY_DEVS_NOT_FIXING_WEEKS_OLD_GUI_BUG by AveYo ver. 322
-echo. &echo  Please close DOTA before switching the QuickCast option, else it's not applied & call :set_dota
+@echo off &mode 99,11 &color 4F &title DOTA_TOGGLE_QUICKCAST_ALTERNATIVE_FOR_LAZY_DEVS_NOT_FIXING_WEEKS_OLD_GUI_BUG by AveYo v322
+echo. &echo  Workaround seems to work only for Arrow, WASD and Legacy Keys - based presets.
+echo  Settings - Reset Hotkeys... to one of those profiles. &echo  Please close DOTA before switching the QuickCast option!
+call :set_dota
 echo  Last used Steam profile: %STEAMDATA% 
 set "quickcast=[void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');"
 set "abilities=[System.Windows.Forms.MessageBox]::Show('Enable QuickCast for abilities?','DOTA LAZY DEVS',4,32);"
