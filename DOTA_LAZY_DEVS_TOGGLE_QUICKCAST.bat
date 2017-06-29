@@ -49,7 +49,7 @@ EnableQuickCast = function(qc_abilities, qc_items, fn) {
   var abilities = ['AbilityPrimary1','AbilityPrimary2','AbilityPrimary3','AbilitySecondary1','AbilitySecondary2','AbilityUltimate'];
   var items = ['Inventory1','Inventory2','Inventory3','Inventory4','Inventory5','Inventory6'];
   var file_src = path.normalize(fn), file_read = fs.readFileSync(file_src, DEF_ENCODING), vdf = ValveDataFormat();
-  var file_parse = vdf.parse(file_read), dotakeys = file_parse.KeyBindings.Keys;
+  var file_parse = vdf.parse(file_read), dotakeys = file_parse.KeyBindings.Keys; file_parse.KeyBindings.Version = 12;
   for (i=0;i<6;i++) dotakeys[abilities[i]].Mode = qc_abilities; for (i=0;i<6;i++) dotakeys[items[i]].Mode = qc_items;
   fs.writeFileSync(fn, vdf.stringify(file_parse,true), DEF_ENCODING);
   console.log(' QuickCast for abilities? ' + qc_abilities + '\r\n' + ' QuickCast for items? ' + qc_items); 
