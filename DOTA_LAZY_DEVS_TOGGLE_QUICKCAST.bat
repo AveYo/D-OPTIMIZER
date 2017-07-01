@@ -19,7 +19,7 @@ goto :eof
 :set_dota outputs %STEAMPATH% %STEAMAPPS% %STEAMDATA% %DOTA%                       ||:i AveYo:" Override detection below if needed "
 set "STEAMPATH=C:\Steam" &set "DOTA=C:\Games\steamapps\common\dota 2 beta"                    
 if not exist "%STEAMPATH%\Steam.exe" call :reg_query "HKCU\SOFTWARE\Valve\Steam" "SteamPath" STEAMPATH
-set "STEAMPATH=%STEAMPATH:/=\%" &if not exist "%STEAMPATH%\Steam.exe" call :end ! Cannot find SteamPath in registry !
+if not exist "%STEAMPATH%\Steam.exe" call :end ! Cannot find SteamPath in registry
 if exist "%DOTA%\game\dota\maps\dota.vpk" set "STEAMAPPS=%DOTA:\common\dota 2 beta=%" &goto :eof
 for %%s in ("%STEAMPATH%") do set "STEAMPATH=%%~dpns" &set "libfilter=LibraryFolders { TimeNextStatsReport ContentStatsID }"
 if not exist "%STEAMPATH%\SteamApps\libraryfolders.vdf" call :end ! Cannot find "%STEAMPATH%\SteamApps\libraryfolders.vdf"
@@ -38,7 +38,7 @@ goto :eof
 setlocal &for /f "skip=2 delims=" %%s in ('reg query "%~1" /v "%~2" /z 2^>nul') do set "rq=%%s" &call set "rv=%%rq:*)    =%%"
 endlocal &call set "%~3=%rv%" &goto :eof                         ||:i AveYo - Usage:" call :reg_query "HKCU\MyKey" "MyValue" MyVar "
 :end %1:Message
-if "%~1"=="!" ( color c0 &echo  %* &timeout /t 16 &color &exit ) else echo  %* &timeout /t 8 &color &exit 
+if "%~1"=="!" ( color c0 &echo !ERROR%* &timeout /t 16 &color &exit ) else echo  %* &timeout /t 8 &color &exit 
 ::----------------------------------------------------------------------------------------------------------------------------------
 exit /b :End_of_Batch_engine_parsing - only JS sections below this line
 ::--------------------------------------------------------------------------------------------------------------------------------*/
