@@ -1,18 +1,15 @@
 # DOTA 2 RESOURCES BY AVEYO
 
-### No-Bling mod - restoring glance value (readme inside)
-https://github.com/AveYo/D-OPTIMIZER/blob/master/dota_lv_nobling_mod_by_aveyo.zip
-
+### No-Bling - "GlanceValue" restoration mod (readme inside)
+https://github.com/No-Bling/DOTA
 
 ### All Dota 2 GUI Settings - autoexec.cfg reference
 http://pastebin.com/ZNSDA8hw
-
 
 ### Benchmark.cfg (no external tools needed, uses built-in Source 2 reporting)
 http://pastebin.com/MdqSLBSv use with MatchID 2844309781 replay
 
 [As .zip including replay file](https://github.com/AveYo/D-OPTIMIZER/releases/download/3.0/Dota_2_benchmark.zip)
-
 
 ### Launch options
 http://pastebin.com/CZqEP5Qr
