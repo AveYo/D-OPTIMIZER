@@ -1,0 +1,17 @@
+"config"
+{
+	"bindings"
+	{
+		"\" "toggleconsole"
+	}
+	
+	"analogbindings"
+	{
+		"X_AXIS"	"iv_rightleft"	
+		"Y_AXIS"	"!iv_forwardback"
+		"MOUSE_X"	"iv_yaw"
+		"MOUSE_Y"	"iv_pitch"
+		"U_AXIS"	"iv_yaw"	
+		"R_AXIS"	"iv_pitch"	
+	}
+}
