@@ -6,6 +6,9 @@ https://github.com/No-Bling/DOTA
 ### All Dota 2 GUI Settings - autoexec.cfg reference
 http://pastebin.com/ZNSDA8hw
 
+### Potato PC user.cfg
+https://pastebin.com/k6hHxu45
+
 ### Benchmark.cfg (no external tools needed, uses built-in Source 2 reporting)
 http://pastebin.com/MdqSLBSv use with MatchID 2844309781 replay
 
@@ -27,6 +30,8 @@ https://pastebin.com/WNEsDzdS - steam_dota_fix.bat (nuke local Steam and DOTA co
 http://pastebin.com/kzkDrDN3 - reset_Dota2.bat (both local cfg and remote cloud settings)
 
 http://pastebin.com/GMyD7UwK - list_my_programs.bat (includes dxdiag, use it for dev.dota bug reports)
+
+https://pastebin.com/bhQrywES - GetLaunchOptions.bat (rightclick - SendTo - GetLaunchOptions any game folder)
 
 http://pastebin.com/uLi92b5s - dota2bandwidthsaver.bat (small savings by blocking a few steam domains)
 
