@@ -1,21 +1,42 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup by AveYo v3 [set it and forget it]
+@echo off &setlocal &title Dota show behavior on startup by AveYo v4 [set it and forget it]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
-echo/if Convars:GetFloat( 'matchmakingbs' ) == nil then > %F%
-echo/  Convars:RegisterCommand('showbs', function() >> %F% 
-echo/    SendToServerConsole( 'top_bar_message "' .. Convars:GetStr( 'ip' ):gsub('\n','') .. '" 0;ip "";' ) -- lean and mean >> %F%
-echo/  end, 'gabenisanass', 2147483649) >> %F%
-echo/  SendToServerConsole( 'alias getbs "developer 1; dota_game_account_debug | ip; developer 0;"' ) -- get behavior_score >> %F%
-echo/  SendToServerConsole( 'alias #stop "alias 0;blink _fov 0 0;blink | grep %%;execute_command_every_frame 0;"' ) -- loop >> %F%
-echo/  SendToServerConsole( 'alias 1.000000 "";' ) -- noop >> %F%
-echo/  SendToServerConsole( 'alias 2.000000 "#stop; getbs; blink execute_command_every_frame 4 1 3";' ) -- delay get-show >> %F%
-echo/  SendToServerConsole( 'alias 3.000000 "#stop; showbs; blink execute_command_every_frame 10 1 4";' ) -- 10/2 how long >> %F%
-echo/  SendToServerConsole( 'alias 4.000000 "#stop; top_bar_message 0;"' ) -- done >> %F%
-echo/  SendToServerConsole( 'blink execute_command_every_frame 12 1 2;' ) -- 12/2 is the main delay (+2 from short delay) >> %F%
-echo/  Convars:RegisterConvar( 'matchmakingbs', '1', 'gabenisanass', 2147483649 ) >> %F%
-echo/end >> %F%
+
+> %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
+>> %F% echo/-- Dota show behavior on startup by AveYo v4 [set it and forget it]
+>> %F% echo/
+>> %F% echo/if Convars:GetFloat( 'matchmakingbs' ) == nil then
+>> %F% echo/  Convars:RegisterConvar( 'matchmakingbs', '1', 'ass', 2147483649 ) -- prevent dbl execution on first startup
+>> %F% echo/  SendToServerConsole( 'matchmakingbs 2;' ) -- could change to an existing cvar to only show on startup
+>> %F% echo/  function SaveBS()
+>> %F% echo/    SendToServerConsole( 'blink _fov 0 0; blink ^| grep %%; execute_command_every_frame "";' ) -- stoploop
+>> %F% echo/    SendToServerConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
+>> %F% echo/    SendToServerConsole( 'blink execute_command_every_frame 2 1 3;' ) -- schedule ShowBS after 2/2=1 seconds
+>> %F% echo/  end
+>> %F% echo/  function ShowBS() 
+>> %F% echo/    SendToServerConsole( 'blink _fov 0 0; blink ^| grep %%; execute_command_every_frame "";' ) -- stoploop
+>> %F% echo/    SendToServerConsole( 'top_bar_message "' .. Convars:GetStr( 'cl_class' ):gsub('\n','') .. '" 0;cl_class default;' )
+>> %F% echo/    SendToServerConsole( 'blink execute_command_every_frame 10 1 4;' ) -- schedule HideBS after 10/2=5 seconds
+>> %F% echo/  end
+>> %F% echo/  function HideBS()
+>> %F% echo/    SendToServerConsole( 'blink _fov 0 0; blink ^| grep %%; execute_command_every_frame "";' ) -- stoploop
+>> %F% echo/    SendToServerConsole( 'top_bar_message 0;' ) -- hide top message
+>> %F% echo/  end
+>> %F% echo/  Convars:RegisterCommand('0.000000', function() end, 'noop', 2147483649) -- noop in case 'unknown cmd' blink error
+>> %F% echo/  Convars:RegisterCommand('1.000000', function() end, 'noop', 2147483649) -- noop empty function I
+>> %F% echo/  Convars:RegisterCommand('2.000000', SaveBS, 'savebs', 2147483649)   -- scheduled save function II
+>> %F% echo/  Convars:RegisterCommand('3.000000', ShowBS, 'showbs', 2147483649)   -- scheduled show function III
+>> %F% echo/  Convars:RegisterCommand('4.000000', HideBS, 'hidebs', 2147483649)   -- scheduled hide function IV 
+>> %F% echo/  SendToServerConsole( 'blink execute_command_every_frame 12 1 2;' ) -- start SaveBS after 12/2=6 seconds since (re)load
+>> %F% echo/end
+>> %F% echo/
+>> %F% echo/-- blink [cvar] [interval] [val1] [val2] simply toggles a cvar between 2 numeric values each interval/2 seconds
+>> %F% echo/-- here is set to toggle execute_command_every_frame between two numeric-like aliases so both blink and execute can use
+>> %F% echo/-- of which the first alias (1 = 1.000000) is empty string, efectively doing nothing half the interval (no perf penalty)
+>> %F% echo/-- and when it's time to run the second alias, stoploop is executed, and schedule stops, or is chain-scheduled further 
+
 call :end  :Done!
 goto :eof
 
