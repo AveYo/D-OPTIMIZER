@@ -33,7 +33,7 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/  if SendToServerConsole then -- only execute locally
 >> %F% echo/    SendToServerConsole( 'blink _fov 0 0;blink ^| grep %%;execute_command_every_frame "";' ) -- stop any loop
 >> %F% echo/    SendToServerConsole( 'top_bar_message "";' ) -- hide top message
->> %F% echo/    SendToServerConsole( 'log_flags Console +DoNotEcho ^| grep %%' ) -- resume Console spew
+>> %F% echo/    SendToServerConsole( 'log_flags Console -DoNotEcho ^| grep %%' ) -- resume Console spew
 >> %F% echo/  end
 >> %F% echo/end
 >> %F% echo/
