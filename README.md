@@ -36,6 +36,6 @@ http://pastebin.com/WAdTPBpC - wifi_scan_toggle.bat (might help with random lag 
 
 http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update PCs over LAN instead of each downloading the same patch)
 
-https://pastebin.com/jQ6nqtEH - dota_show_behavior_on_startup_and_newmatch.bat (only need to run it once for setup)
+https://pastebin.com/jQ6nqtEH - dota_show_behavior_on_startup_and_after_match.bat (only need to run it once for setup)
 
 more are available on above pastebin directory
