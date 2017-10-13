@@ -1,15 +1,15 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v7 with dynamic grade color [just run once]
+@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v7f with dynamic grade color [just run once]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
 
  > %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
->> %F% echo/-- Dota show behavior on startup and after match by AveYo v7 with dynamic grade color [set it and forget it] 
->> %F% echo/-- v7 : Reliable, native VScript scheduler!   
+>> %F% echo/-- Dota show behavior on startup and after match by AveYo v7f with dynamic grade color [set it and forget it]
+>> %F% echo/-- v7f : Reliable, native VScript scheduler!
 >> %F% echo/
 >> %F% echo/local ToConsole = function(s) if SendToServerConsole then SendToServerConsole(s) else SendToConsole(s) end end
->> %F% echo/local HideBehaviorScore = function() ToConsole( 'top_bar_message "";' ) end -- just clear bar message
+>> %F% echo/local HideBehaviorScore = function(t) ToConsole( 'top_bar_message "";' ) Convars:SetStr('cl_class','default') end
 >> %F% echo/local ShowBehaviorScore = function(t)
 >> %F% echo/  local behavior_score = Convars:GetStr( 'cl_class' ):gsub('\n','') -- import i/o cvar cl_class 
 >> %F% echo/  local grade = behavior_score:gsub('behavior_score: ',''):gsub('+',''):gsub('-','') -- substring grade
@@ -17,15 +17,15 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/  local ass = 1 -- set flag to use red message by default
 >> %F% echo/  if flower[grade] then ass = 0 end -- set flag to use blue message if behavior_score is flower grade
 >> %F% echo/  print( behavior_score ) -- print behavior_score into Console
->> %F% echo/  Convars:SetStr('cl_class','default') -- reset i/o cvar cl_class [choice has no ill-effects]
 >> %F% echo/  ToConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
->> %F% echo/  local VScheduler = EntIndexToHScript(0) -- is there are entities loaded, than vscheduler is available
+>> %F% echo/  local VScheduler = EntIndexToHScript(0) -- if there are entities loaded, than vscheduler is available
 >> %F% echo/  if VScheduler then VScheduler:SetContextThink( "GabenPlz", HideBehaviorScore, 4 ) end -- hide after 4s
 >> %F% echo/end
 >> %F% echo/
->> %F% echo/ToConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
->> %F% echo/ListenToGameEvent("player_connect_full", ShowBehaviorScore, nil) -- show message after each new map
->> %F% echo/ListenToGameEvent("dota_game_state_change", HideBehaviorScore, nil) -- hide message (for online lobby)
+>> %F% echo/if SendToServerConsole then -- local client only [ VScripts loads two vm's, one for sv, one for cl ]
+>> %F% echo/  ToConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
+>> %F% echo/  ListenToGameEvent("player_connect_full", ShowBehaviorScore, nil) -- show message after each new map
+>> %F% echo/end
 >> %F% echo/
 
 call :end %P%\%F% :Done!
