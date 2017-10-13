@@ -1,21 +1,16 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v6.1 with dynamic grade color [just run once]
+@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v7 with dynamic grade color [just run once]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
 
  > %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
->> %F% echo/-- Dota show behavior on startup and after match by AveYo v6.1 with dynamic grade color [set it and forget it] 
->> %F% echo/-- v6.1 : lowered schedule times, re-added fcvar flags [server_can_execute clientcmd_can_execute] 
+>> %F% echo/-- Dota show behavior on startup and after match by AveYo v7 with dynamic grade color [set it and forget it] 
+>> %F% echo/-- v7 : Reliable, native VScript scheduler!   
 >> %F% echo/
->> %F% echo/local NoopBS = function() end
->> %F% echo/local SaveBS = function()
->> %F% echo/  SendToServerConsole( 'blink _fov 0 0;blink ^| grep %%;execute_command_every_frame "";' ) -- stop any loop
->> %F% echo/  SendToServerConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
->> %F% echo/  SendToServerConsole( 'blink execute_command_every_frame 1 1 3;' ) -- chain-schedule ShowBS after 1/2=0.5 seconds
->> %F% echo/end
->> %F% echo/local ShowBS = function() 
->> %F% echo/  SendToServerConsole( 'blink _fov 0 0;blink ^| grep %%;execute_command_every_frame "";' ) -- stop any loop
+>> %F% echo/local ToConsole = function(s) if SendToServerConsole then SendToServerConsole(s) else SendToConsole(s) end end
+>> %F% echo/local HideBehaviorScore = function() ToConsole( 'top_bar_message "";' ) end -- just clear bar message
+>> %F% echo/local ShowBehaviorScore = function(t)
 >> %F% echo/  local behavior_score = Convars:GetStr( 'cl_class' ):gsub('\n','') -- import i/o cvar cl_class 
 >> %F% echo/  local grade = behavior_score:gsub('behavior_score: ',''):gsub('+',''):gsub('-','') -- substring grade
 >> %F% echo/  local flower = { Normal=true, A=true, B=true, C=true } -- Roses are Red, Violetes are Blue
@@ -23,42 +18,29 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/  if flower[grade] then ass = 0 end -- set flag to use blue message if behavior_score is flower grade
 >> %F% echo/  print( behavior_score ) -- print behavior_score into Console
 >> %F% echo/  Convars:SetStr('cl_class','default') -- reset i/o cvar cl_class [choice has no ill-effects]
->> %F% echo/  SendToServerConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
->> %F% echo/  SendToServerConsole( 'blink execute_command_every_frame 10 1 4;' ) -- chain-schedule HideBS after 10/2=5 seconds
->> %F% echo/end
->> %F% echo/local HideBS = function()
->> %F% echo/  SendToServerConsole( 'blink _fov 0 0;blink ^| grep %%;execute_command_every_frame "";' ) -- stop any loop
->> %F% echo/  SendToServerConsole( 'top_bar_message "";' ) -- hide top message
->> %F% echo/  SendToServerConsole( 'log_flags Console -DoNotEcho ^| grep %%;' ) -- resume Console spew
+>> %F% echo/  ToConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
+>> %F% echo/  local VScheduler = EntIndexToHScript(0) -- is there are entities loaded, than vscheduler is available
+>> %F% echo/  if VScheduler then VScheduler:SetContextThink( "GabenPlz", HideBehaviorScore, 4 ) end -- hide after 4s
 >> %F% echo/end
 >> %F% echo/
->> %F% echo/if SendToServerConsole then -- only execute locally
->> %F% echo/  SendToServerConsole( 'log_flags Console +DoNotEcho ^| grep %%;' ) -- disable Console spew
->> %F% echo/  Convars:RegisterCommand( '4.000000', HideBS, 'hidebs', 2147483649 ) -- HideBS function 4 [end-schedule]
->> %F% echo/  Convars:RegisterCommand( '3.000000', ShowBS, 'showbs', 2147483649 ) -- ShowBS function 3 [chain-schedule HideBS]
->> %F% echo/  Convars:RegisterCommand( '2.000000', SaveBS, 'savebs', 2147483649 ) -- SaveBS function 2 [chain-schedule ShowBS]
->> %F% echo/  Convars:RegisterCommand( '1.000000', NoopBS, 'noopbs', 2147483649 ) -- NoopBS function 1 [runs half the interval]
->> %F% echo/  Convars:RegisterCommand( '0.000000', NoopBS, 'noopbs', 2147483649 ) -- NoopBS function 0 [runs if blink cmd fails]
->> %F% echo/  SendToServerConsole( 'blink execute_command_every_frame 3 1 2;' ) -- [coreinit-schedule SaveBS after 3/2=1.5 seconds]
->> %F% echo/end
+>> %F% echo/ToConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
+>> %F% echo/ListenToGameEvent("player_connect_full", ShowBehaviorScore, nil) -- show message after each new map
+>> %F% echo/ListenToGameEvent("dota_game_state_change", HideBehaviorScore, nil) -- hide message (for online lobby)
 >> %F% echo/
->> %F% echo/-- blink [cvar] [interval] [val1] [val2] simply toggles a cvar between 2 numeric values each interval/2 seconds
->> %F% echo/-- here is set to toggle execute_command_every_frame between two numeric-like aliases so both blink and execute can use
->> %F% echo/-- of which the first alias [1 = 1.000000] is empty string, efectively doing nothing half the interval [no perf penalty]
->> %F% echo/-- and when it's time to run the second alias, stoploop is executed, and schedule stops, or is chain-scheduled further 
 
-call :end  :Done!
+call :end %P%\%F% :Done!
 goto :eof
 
-:set_dota outputs %STEAMPATH% %STEAMAPPS% %STEAMDATA% %DOTA%                       ||:i AveYo:" Override detection below if needed "
-set "STEAMPATH=C:\Steam" &set "DOTA=C:\Games\steamapps\common\dota 2 beta"
+:set_dota outputs %STEAMPATH% %STEAMAPPS% %DOTA%                                   ||:i AveYo:" Override detection below if needed "
+set "STEAMPATH=D:\Steam" &set "DOTA=D:\Games\steamapps\common\dota 2 beta"
 if not exist "%STEAMPATH%\Steam.exe" call :reg_query "HKCU\SOFTWARE\Valve\Steam" "SteamPath" STEAMPATH
+set "STEAMDATA=" &if defined STEAMPATH for %%# in ("%STEAMPATH:/=\%") do set "STEAMPATH=%%~dpnx#"     ||:i  / pathsep on Windows lul
 if not exist "%STEAMPATH%\Steam.exe" call :end ! Cannot find SteamPath in registry
 if exist "%DOTA%\game\dota\maps\dota.vpk" set "STEAMAPPS=%DOTA:\common\dota 2 beta=%" &goto :eof
-for %%s in ("%STEAMPATH%") do set "STEAMPATH=%%~dpns" &set "libfilter=LibraryFolders { TimeNextStatsReport ContentStatsID }"
+set "libfilter=LibraryFolders { TimeNextStatsReport ContentStatsID }"
 if not exist "%STEAMPATH%\SteamApps\libraryfolders.vdf" call :end ! Cannot find "%STEAMPATH%\SteamApps\libraryfolders.vdf"
 for /f usebackq^ delims^=^"^ tokens^=4 %%s in (`findstr /v "%libfilter%" "%STEAMPATH%\SteamApps\libraryfolders.vdf"`) do (
-if exist "%%s\steamapps\appmanifest_570.acf" if exist "%%s\steamapps\common\dota 2 beta\game\dota\maps\dota.vpk" set "libfs=%%s" )
+ if exist "%%s\steamapps\appmanifest_570.acf" if exist "%%s\steamapps\common\dota 2 beta\game\dota\maps\dota.vpk" set "libfs=%%s" )
 set "STEAMAPPS=%STEAMPATH%\steamapps" &if defined libfs set "STEAMAPPS=%libfs:\\=\%\steamapps"
 if not exist "%STEAMAPPS%\common\dota 2 beta\game\dota\maps\dota.vpk" call :end ! Cannot find "%STEAMAPPS%\common\dota 2 beta"
 set "DOTA=%STEAMAPPS%\common\dota 2 beta" &goto :eof
