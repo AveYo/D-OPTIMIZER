@@ -1,15 +1,15 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v7f with dynamic grade color [just run once]
+@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v7g with dynamic grade color [just run once]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
 
  > %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
->> %F% echo/-- Dota show behavior on startup and after match by AveYo v7f with dynamic grade color [set it and forget it]
->> %F% echo/-- v7f : Reliable, native VScript scheduler!
+>> %F% echo/-- Dota show behavior on startup and after match by AveYo v7g with dynamic grade color [set it and forget it]
+>> %F% echo/-- v7g : Reliable, native VScript scheduler!
 >> %F% echo/
 >> %F% echo/local ToConsole = function(s) if SendToServerConsole then SendToServerConsole(s) else SendToConsole(s) end end
->> %F% echo/local HideBehaviorScore = function(t) ToConsole( 'top_bar_message "";' ) Convars:SetStr('cl_class','default') end
+>> %F% echo/local HideBehaviorScore = function(t) ToConsole( 'top_bar_message "" ' .. t ) Convars:SetStr('cl_class','default') end
 >> %F% echo/local ShowBehaviorScore = function(t)
 >> %F% echo/  local behavior_score = Convars:GetStr( 'cl_class' ):gsub('\n','') -- import i/o cvar cl_class 
 >> %F% echo/  local grade = behavior_score:gsub('behavior_score: ',''):gsub('+',''):gsub('-','') -- substring grade
@@ -19,7 +19,7 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/  print( behavior_score ) -- print behavior_score into Console
 >> %F% echo/  ToConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
 >> %F% echo/  local VScheduler = EntIndexToHScript(0) -- if there are entities loaded, than vscheduler is available
->> %F% echo/  if VScheduler then VScheduler:SetContextThink( "GabenPlz", HideBehaviorScore, 4 ) end -- hide after 4s
+>> %F% echo/  if VScheduler then VScheduler:SetContextThink( "GabenPlz", function() HideBehaviorScore(ass) end, 4 ) end -- 4 seconds
 >> %F% echo/end
 >> %F% echo/
 >> %F% echo/if SendToServerConsole then -- local client only [ VScripts loads two vm's, one for sv, one for cl ]
