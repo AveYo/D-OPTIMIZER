@@ -5,7 +5,7 @@ set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 set "enable=[void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');"
 set "vscript=[System.Windows.Forms.MessageBox]::Show('Show behavior on startup and after match?','AveYo DOTA vscript',4,32);"
 for /f %%q in ('powershell -c "%enable%;%vscript%"') do set "result=%%q"
-if /i "%result%"=="Yes" ( call :install_vscript ) else call :remove_vscript
+if /i "%result%"=="No" ( call :remove_vscript ) else call :install_vscript
 call :end :Done!
 exit/b
 
@@ -59,3 +59,4 @@ setlocal &for /f "skip=2 delims=" %%s in ('reg query "%~1" /v "%~2" /z 2^>nul') 
 endlocal &call set "%~3=%rv%" &exit/b                            ||:i AveYo - Usage:" call :reg_query "HKCU\MyKey" "MyValue" MyVar "
 :end %1:Message
 if "%~1"=="!" ( color c0 &echo !ERROR%* &timeout /t 16 &color &exit ) else echo  %* &timeout /t 8 &color &exit
+::
