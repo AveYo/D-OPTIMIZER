@@ -1,5 +1,5 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v8 with dynamic grade color [just run once]
+@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v8 final with dynamic grade color [just run once]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 set "enable=[void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');"
@@ -17,8 +17,8 @@ del /f/q "%P%\%F%" >nul 2>nul &exit/b
 echo  INSTALLING %P%\%F%
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
  > %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
->> %F% echo/-- Dota show behavior on startup and after match by AveYo v7g with dynamic grade color [set it and forget it]
->> %F% echo/-- v7g : Reliable, native VScript scheduler!
+>> %F% echo/-- Dota show behavior on startup and after match by AveYo v8 with dynamic grade color [set it and forget it]
+>> %F% echo/-- v8 final : Reliable, native VScript scheduler!
 >> %F% echo/
 >> %F% echo/local ToConsole = function(s) if SendToServerConsole then SendToServerConsole(s) else SendToConsole(s) end end
 >> %F% echo/local HideBehaviorScore = function(t) ToConsole( 'top_bar_message "" ' .. t ) Convars:SetStr('cl_class','default') end
@@ -29,9 +29,11 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/  local ass = 1 -- set flag to use red message by default
 >> %F% echo/  if flower[grade] then ass = 0 end -- set flag to use blue message if behavior_score is flower grade
 >> %F% echo/  print( behavior_score ) -- print behavior_score into Console
->> %F% echo/  ToConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
 >> %F% echo/  local VScheduler = EntIndexToHScript(0) -- if there are entities loaded, than vscheduler is available
->> %F% echo/  if VScheduler then VScheduler:SetContextThink( "GabenPlz", function() HideBehaviorScore(ass) end, 4 ) end -- 4 seconds
+>> %F% echo/  if VScheduler then 
+>> %F% echo/    ToConsole( 'top_bar_message "' .. behavior_score .. '" ' .. ass .. ';' ) -- show top bar gui message
+>> %F% echo/    VScheduler:SetContextThink( "GabenPlz", function() HideBehaviorScore(ass) end, 4 ) -- hide after 4 seconds
+>> %F% echo/  end  
 >> %F% echo/end
 >> %F% echo/
 >> %F% echo/if SendToServerConsole then -- local client only [ VScripts loads two vm's, one for sv, one for cl ]
