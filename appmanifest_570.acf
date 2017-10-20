@@ -1,0 +1,31 @@
+"AppState"
+{
+	"appid"		"570"
+	"Universe"		"1"
+	"name"		"Dota 2"
+	"StateFlags"		"6"
+	"installdir"		"dota 2 beta"
+	"LastUpdated"		"0"
+	"UpdateResult"		"0"
+	"SizeOnDisk"		"0"
+	"buildid"		"2207155"
+	"LastOwner"		"0"
+	"BytesToDownload"		"0"
+	"BytesDownloaded"		"0"
+	"AutoUpdateBehavior"		"2"
+	"AllowOtherDownloadsWhileRunning"		"1"
+	"UserConfig"
+	{
+	}
+	"InstalledDepots"
+	{
+	}
+	"MountedDepots"
+	{
+	}
+	"InstallScripts"
+	{
+		"0"		"_CommonRedist\\vcredist\\2010\\installscript.vdf"
+		"1"		"_CommonRedist\\DirectX\\Jun2010\\installscript.vdf"
+	}
+}
