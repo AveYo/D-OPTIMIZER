@@ -38,8 +38,8 @@ http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update PCs over LAN instead o
 
 https://pastebin.com/jQ6nqtEH - dota_show_behavior_on_startup_and_after_match.bat (only need to run it once for setup)
 
-https://pastebin.com/L795zT8c - streamlink.bat (use it with Streamlink - twitch in video player - [all-in-one package v4](https://github.com/AveYo/D-OPTIMIZER/releases/tag/0.4))
+https://pastebin.com/L795zT8c - streamlink.bat (use it with Streamlink - twitch in video player - [all-in-one package v5](https://github.com/AveYo/D-OPTIMIZER/releases/tag/0.5))
 
-https://pastebin.com/aaeBdXwz - streamlinkchat.bat (use it with Streamlink - twitch in video player - [all-in-one package v4](https://github.com/AveYo/D-OPTIMIZER/releases/tag/0.4))
+https://pastebin.com/aaeBdXwz - streamlinkchat.bat (use it with Streamlink - twitch in video player - [all-in-one package v5](https://github.com/AveYo/D-OPTIMIZER/releases/tag/0.5))
 
 more are available on above pastebin directory
