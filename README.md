@@ -30,16 +30,14 @@ http://pastebin.com/GMyD7UwK - list_my_programs.bat (use it for dev.dota bug rep
 
 https://pastebin.com/bhQrywES - GetLaunchOptions.bat (rightclick - SendTo - GetLaunchOptions any game folder)
 
-http://pastebin.com/uLi92b5s - dota2bandwidthsaver.bat (small savings by blocking a few steam domains)
+https://pastebin.com/jQ6nqtEH - dota_show_behavior_on_startup_and_after_match.bat (only need to run it once for setup)
 
 http://pastebin.com/WAdTPBpC - wifi_scan_toggle.bat (might help with random lag / stutters)
 
+http://pastebin.com/uLi92b5s - dota2bandwidthsaver.bat (small savings by blocking a few steam domains)
+
 http://pastebin.com/qc1vjMaY - dota_lan_share.bat (update PCs over LAN instead of each downloading the same patch)
 
-https://pastebin.com/jQ6nqtEH - dota_show_behavior_on_startup_and_after_match.bat (only need to run it once for setup)
-
 https://pastebin.com/L795zT8c - streamlink.bat (use it with Streamlink - twitch in video player - [all-in-one package](https://github.com/AveYo/Streamlink-all-in-one/releases))
-
-https://pastebin.com/aaeBdXwz - streamlinkchat.bat (use it with Streamlink - twitch in video player - [all-in-one package](https://github.com/AveYo/Streamlink-all-in-one/releases))
 
 more are available on above pastebin directory
