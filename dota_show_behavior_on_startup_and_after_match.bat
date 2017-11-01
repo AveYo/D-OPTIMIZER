@@ -1,5 +1,5 @@
 :: for non-windows, save https://pastebin.com/saYGskE6 in \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
-@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v8 final with dynamic grade color [just run once]
+@echo off &setlocal &title Dota show behavior on startup and after match by AveYo v9 final with dynamic grade color [just run once]
 call :set_dota
 set "P=%DOTA%\game\dota\scripts\vscripts\core" &set "F=coreinit.lua"
 set "enable=[void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');"
@@ -18,7 +18,7 @@ echo  INSTALLING %P%\%F%
 mkdir "%P%" >nul 2>nul &cd /d "%P%" 
  > %F% echo/-- this file: \steamapps\common\dota 2 beta\game\dota\scripts\vscripts\core\coreinit.lua
 >> %F% echo/-- Dota show behavior on startup and after match by AveYo v8 with dynamic grade color [set it and forget it]
->> %F% echo/-- v8 final : Reliable, native VScript scheduler!
+>> %F% echo/-- v9 final : Reliable, native VScript scheduler!
 >> %F% echo/
 >> %F% echo/local ToConsole = function(s) if SendToServerConsole then SendToServerConsole(s) else SendToConsole(s) end end
 >> %F% echo/local HideBehaviorScore = function(t) ToConsole( 'top_bar_message "" ' .. t ) Convars:SetStr('cl_class','default') end
@@ -37,7 +37,7 @@ mkdir "%P%" >nul 2>nul &cd /d "%P%"
 >> %F% echo/end
 >> %F% echo/
 >> %F% echo/if SendToServerConsole then -- local client only [ VScripts loads two vm's, one for sv, one for cl ]
->> %F% echo/  ToConsole( 'developer 1; dota_game_account_debug ^| cl_class; developer 0;' ) -- save score into cl_class
+>> %F% echo/  ToConsole( 'developer 1; dota_game_account_client_debug ^| cl_class; developer 0;' ) -- save score into cl_class
 >> %F% echo/  ListenToGameEvent("player_connect_full", ShowBehaviorScore, nil) -- show message after each new map
 >> %F% echo/end
 >> %F% echo/
