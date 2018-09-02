@@ -1,0 +1,96 @@
+"AppState"
+{
+	"appid"		"570"
+	"Universe"		"1"
+	"name"		"Dota 2"
+	"StateFlags"		"2"
+	"installdir"		"dota 2 beta"
+	"LastUpdated"		"0"
+	"UpdateResult"		"0"
+	"SizeOnDisk"		"0"
+	"buildid"		"322"
+	"LastOwner"		"0"
+	"BytesToDownload"		"0"
+	"BytesDownloaded"		"322"
+	"AutoUpdateBehavior"		"2"
+	"AllowOtherDownloadsWhileRunning"		"1"
+	"ScheduledAutoUpdate"		"0"
+	"StagingFolder"		"0"
+	"UserConfig"
+	{
+		"language"		"english"
+		"optionaldlc"		""
+	}
+	"InstalledDepots"
+	{
+		"228983"
+		{
+			"manifest"		"8124929965194586177"
+		}
+		"228990"
+		{
+			"manifest"		"1829726630299308803"
+		}
+		"373301"
+		{
+			"manifest"		"2869930651072540260"
+		}
+		"381451"
+		{
+			"manifest"		"3511286814489206219"
+		}
+		"381452"
+		{
+			"manifest"		"8712386699090850846"
+		}
+		"381453"
+		{
+			"manifest"		"5320350656752144798"
+		}
+		"381454"
+		{
+			"manifest"		"5669759276949233862"
+		}
+		"381455"
+		{
+			"manifest"		"5292496499528312762"
+		}
+		"373302"
+		{
+			"manifest"		"5093399285430303503"
+		}
+		"373303"
+		{
+			"manifest"		"6506914990589610514"
+		}
+		"373305"
+		{
+			"manifest"		"4435851250675935801"
+		}
+		"381450"
+		{
+			"manifest"		"2884137309256197985"
+			"dlcappid"		"313250"
+		}
+	}
+	"MountedDepots"
+	{
+		"228983"		"8124929965194586177"
+		"228990"		"1829726630299308803"
+		"373301"		"2869930651072540260"
+		"381451"		"3511286814489206219"
+		"381452"		"8712386699090850846"
+		"381453"		"5320350656752144798"
+		"381454"		"5669759276949233862"
+		"381455"		"5292496499528312762"
+		"373302"		"5093399285430303503"
+		"373303"		"6506914990589610514"
+		"373305"		"4435851250675935801"
+		"381450"		"2884137309256197985"
+	}
+	"InstallScripts"
+	{
+		"0"		"_CommonRedist\\vcredist\\2010\\installscript.vdf"
+		"1"		"_CommonRedist\\DirectX\\Jun2010\\installscript.vdf"
+	}
+} 
