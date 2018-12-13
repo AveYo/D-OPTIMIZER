@@ -1,55 +1,55 @@
-goto="init" /* " GetLaunchOptions "                                                          
-:"init"
-@echo off &setlocal &mode 80,8 &color 70 &title %~n0 by AveYo v1.0
+goto="init" /* " GetLaunchOptions prefixed with / or - "
+:"init" 2018.12.12: fixed not listing launch options containing -
+@echo off &setlocal &mode 80,8 &color 70 &title %~n0 by AveYo v1.3
 echo   GetLaunchOptions grabs -strings from exe and dll files
 echo   Simplified usage after first run:
-echo  -^> Right-click game folder -^> Send to -^> GetLaunchOptions  
+echo  -^> Right-click game folder -^> Send to -^> GetLaunchOptions
 rem call :install &rem uncomment to update APPDATA script if new version is released
 if not exist "%APPDATA%\AveYo\strings2.exe" call :install
-if not exist "%APPDATA%\Microsoft\Windows\SendTo\%~nx0" call :install
-set "game=" &if exist "%~1\*" set "game=%~1" 
+if not exist "%APPDATA%\Microsoft\Windows\SendTo\GetLaunchOptions.bat" call :install
+set "game=" &if exist "%~1\*" set "game=%~1"
 :: powershell openfolderdialog snippet
 set "o=[void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");"
 set "f=$ofd=New-Object System.Windows.Forms.FolderBrowserDialog;$ofd.rootfolder="MyComputer";"
 set "d=[void]$ofd.ShowDialog(); $ofd.SelectedPath;"
 set "ps_openfolderdialog=%o:"=\"%%f:"=\"%%d:"=\"%"
-if not defined game for /f "delims=" %%a in ('powershell -c "%ps_openfolderdialog%"') do set "game=%%a"                                                                                                                                                                                                                              
+if not defined game for /f "delims=" %%a in ('powershell -c "%ps_openfolderdialog%"') do set "game=%%a"
 if not exist "%game%" color 4f &echo. &echo ERROR! Invalid "%game%" folder selected.. &pause &exit
 :: defines
 set "numchars=4"
 for /f %%c in ('copy /z "%~dpf0" nul') do set "`CR=%%c"
-set "regex=^\-[^|<>(){}?@%%!=+/.,:;'`\-\[\]\$\*\^\~\"\\]*$"
+set "regex=^[\-/][aA-Z][^|<>(){}?@#&%%!=+.,:;/'`\[\]\$\*\^\~\"\\]*$"
 :: process game folder
 echo. &echo GAMEPATH = %game%
 pushd "%game%"
 del /f/s/q _LAUNCHOPTIONS_ >nul 2>nul &rmdir /s/q _LAUNCHOPTIONS_ >nul 2>nul &mkdir _LAUNCHOPTIONS_ >nul 2>nul
 set "outpath=%game%\_LAUNCHOPTIONS_"
-echo ;%~n0 by AveYo v1.0 >"%outpath%\@LAUNCH_OPTIONS.ini"
+echo ;%~n0 by AveYo v1.1 - https://pastebin.com/bhQrywES >"%outpath%\@LAUNCH_OPTIONS.ini"
 for /f "delims=" %%a in ('dir /a:-D /b /s *.exe,*.dll') do (
  pushd "%%~dpa"
  call "%APPDATA%\AveYo\strings2.exe" "%%~nxa" -l %numchars% -nh>"%outpath%\%%~nxa.txt"
  pushd "%outpath%"
  cd.>launchoptions.tmp
- for /f %%s in ('findstr /B /I /R /C:"%%regex%%" "%%~nxa.txt"') do call :launchoptions %%s 
+ for /f %%s in ('findstr /B /I /R /C:"%%regex%%" "%%~nxa.txt"') do call :launchoptions "%%s"
  if defined sz echo.>>@LAUNCH_OPTIONS.ini &echo/[%%~a]>>@LAUNCH_OPTIONS.ini
  if defined sz sort /REC 65535 launchoptions.tmp >>@launch_options.ini
-) 
+)
 pushd "%~dp0"
 del /f /q "%outpath%\launchoptions.tmp" >nul 2>nul
 if not exist "%outpath%\*.txt" color 0e
 if exist "%outpath%\*.txt" start "" notepad "%outpath%\@LAUNCH_OPTIONS.ini" &timeout /t 5 >nul 2>nul
 if not exist "%outpath%\*.txt" del /f/s/q "%outpath%" >nul 2>nul &rmdir /s/q "%outpath%" >nul 2>nul
-endlocal &goto :eof 
+endlocal &goto :eof
 :launchoptions
 setlocal enableextensions enabledelayedexpansion
 set "lo=%~1" &call set "lo=!lo:%%`CR%%=!"
 if not "!lo!"=="-" echo/!lo!>>launchoptions.tmp
 set "sz=" &for %%k in (launchoptions.tmp) do set "sz=%%~zk"
-if "%sz%0"=="00" set "sz=" 
+if "%sz%0"=="00" set "sz="
 endlocal &set "sz=%sz%" &goto :eof
 :install
-set "res=strings2.ex_" &set "strings2=%APPDATA%\AveYo\strings2.exe" &md "%APPDATA%\AveYo\" >nul 2>nul &pushd "%APPDATA%\AveYo\" 
-copy /y "%~f0" "%APPDATA%\AveYo\" >nul 2>nul &copy /y "%~f0" "%APPDATA%\Microsoft\Windows\SendTo\" >nul 2>nul
+set "res=strings2.ex_" &set "strings2=%APPDATA%\AveYo\strings2.exe" &md "%APPDATA%\AveYo\" >nul 2>nul &pushd "%APPDATA%\AveYo\"
+copy /y "%~f0" "%APPDATA%\AveYo\" >nul 2>nul &copy /y "%~f0" "%APPDATA%\Microsoft\Windows\SendTo\GetLaunchOptions.bat" >nul 2>nul
 if not exist "%strings2%" cscript.exe //nologo //e:JScript "%~f0" &expand -R "%res%" >nul 2>nul &del /f /q "%res%"
 if not exist "%strings2%" color cf &echo ERROR! %APPDATA%\AveYo\strings2.exe not found &timeout /t 10 &endlocal &exit
 goto :eof
@@ -170,4 +170,4 @@ z='00000000'; pad=(res.length%5)||5; res+='~~~~~'.slice(pad); pad=10-2*pad; a=re
 for(var l=a.length;l--;){n=0;for(j=5;j--;)n+=d85[a[l].charAt(j)]*p85[4-j];a[l]=z.slice(n.toString(16).length)+n.toString(16)};
 res85dec=(pad>0)?a.join('').slice(0,-pad):a.join('');WSH.Echo(' RES2BATCH: extracting '+fn);
 xe=WSH.CreateObject('Microsoft.XMLDOM').createElement('bh');as=WSH.CreateObject('ADODB.Stream');as.Mode=3;as.Type=1;as.Open();
-xe.dataType='bin.hex';xe.text=res85dec;as.Write(xe.nodeTypedValue);as.SaveToFile(fn,2);as.Close(); 
+xe.dataType='bin.hex';xe.text=res85dec;as.Write(xe.nodeTypedValue);as.SaveToFile(fn,2);as.Close();
