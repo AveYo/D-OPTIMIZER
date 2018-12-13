@@ -1,4 +1,4 @@
-@set @v=6 /*
+@set @v=7 /*
 @echo off &set "arg1=%1" &set "arg2=%2" &color 4f &title DOTA primary mm language override by AveYo v%@v:/*=%
 echo.
 echo      ---------------------------------------------------------------------
@@ -213,13 +213,14 @@ LOCase=function(s){ w.echo(s.toLowerCase()); };
 // greatly improved cscript performance - it's not that bad overall but still lags behind node.js       stringify:  0.922s   3.439s
 //---------------------------------------------------------------------------------------------------------------------------------
 function ValveDataFormat(){
-  var jscript=(typeof ScriptEngine == 'function' && ScriptEngine() == 'JScript'); if (!jscript){ var w={}; w.echo=console.log; }
+  var jscript=(typeof ScriptEngine == 'function' && ScriptEngine() == 'JScript');
+  if (!jscript){ var w={}; w.echo=function(s){console.log(s+'\r');}; } else { w=WScript; }
   var order=!jscript, dups=false, comments=false, newline='\n', empty=(jscript) ? '' : undefined;
   return {
     parse: function(txt, flag){
       var obj={}, stack=[obj], expect_bracket=false, i=0; comments=flag || false;
       if (/\r\n/.test(txt)){newline='\r\n';} else newline='\n';
-      var m, regex =/[^"\r\n]*(\/\/.*)|"([^"]*)"[ \t]+"([^"]*\\"[^"]*\\"[^"]*|[^"]*)"|"([^"]*)"|({)|(})/g;                      //"
+      var m, regex =/[^"\r\n]*(\/\/.*)|"([^"]*)"[ \t]+"(.*)"|"([^"]*)"|({)|(})/g; //"
       while ((m=regex.exec(txt)) !== null){
         //lf='\n'; w.echo(' cmnt:'+m[1]+lf+' key:'+m[2]+lf+' val:'+m[3]+lf+' add:'+m[4]+lf+' open:'+m[5]+lf+' close:'+m[6]+lf);
         if (comments && m[1] !== empty){
@@ -236,7 +237,7 @@ function ValveDataFormat(){
         } else if (m[2] !== empty){
           key=m[2]; if (expect_bracket){ w.echo('VDF.parse: invalid bracket near '+m[0]); return this.stringify(obj,true); }
           if (order && key == ''+~~key) key='\x11'+key;               // AveYo: prepend nr. keys with \x11 to keep order in node.js
-          if (typeof stack[stack.length-1][key] !== 'undefined'){ i++;key+= '\x12'+i; dups=true; }//AveYo: rename duplicate kv pair
+          if (typeof stack[stack.length-1][key] !== 'undefined'){ i++;key+= '\x12'+i; dups=true; }   // AveYo: rename duplicate k-v
           stack[stack.length-1][key]=m[3]||'';
         } else if (m[5] !== empty){
           expect_bracket=false; continue; // one level deeper
