@@ -1,4 +1,6 @@
-# DOTA 2 RESOURCES BY AVEYO
+# DOTA 2 RESOURCES BY AVEYO (OTHER THAN THE STAND-ALONE RELEASES)
+
+Hint: use `Clone or download` - `download zip` button to get the batch files with proper windows line endings  
 
 #### No-Bling - "GlanceValue" restoration mod v2 - with more performance Tweaks and polished manual filters!  
 https://github.com/No-Bling/DOTA  
@@ -22,8 +24,6 @@ https://github.com/AveYo/D-OPTIMIZER/blob/master/dota_cvarlist.txt - newer, text
 https://github.com/AveYo/D-OPTIMIZER/blob/master/Dota2%20cvars.xls  
 
 #### Useful batch files
-
-https://pastebin.com/WNEsDzdS - steam_dota_fix.bat (nuke local Steam and DOTA configuration, then force a verify)
 
 http://pastebin.com/kzkDrDN3 - reset_Dota2.bat (both local cfg and remote cloud settings)
 
